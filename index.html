@@ -13,6 +13,7 @@
             background-color: #f4f1ea;
             margin: 0;
             font-family: 'Georgia', serif;
+            overflow: hidden;
         }
         .envelope-wrapper {
             position: relative;
@@ -25,6 +26,7 @@
             background: #2c3e50;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             border-radius: 0 0 5px 5px;
+            z-index: 2;
         }
         .envelope::before {
             content: '';
@@ -83,11 +85,38 @@
             letter-spacing: 2px;
             z-index: 2;
         }
+       
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #dfba6b;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #dfba6b, 0 0 20px #dfba6b;
+            pointer-events: none;
+            z-index: 5;
+            animation: fly 1s ease-out forwards;
+        }
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--var-y)) scale(0);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="envelope-wrapper" onclick="this.classList.toggle('open')">
+
+<audio id="jazz-music" loop>
+    <source src="https://soundhelix.com" type="audio/mpeg">
+</audio>
+
+<div class="envelope-wrapper" id="envelope-btn">
     <div class="envelope">
         <div class="text-on-env">For Anastasya ✨</div>
     </div>
@@ -100,6 +129,48 @@
         <p>Wishing you endless joy and beautiful memories in your new home!</p>
     </div>
 </div>
+
+<script>
+    const envelope = document.getElementById('envelope-btn');
+    const music = document.getElementById('jazz-music');
+    music.volume = 0.4; 
+
+    envelope.addEventListener('click', function(e) {
+        this.classList.toggle('open');
+        
+        if (this.classList.contains('open')) {
+            music.play().catch(error => console.log("Audio playback delayed"));
+           
+            createSparkles(15);
+        } else {
+            music.pause();
+        }
+    });
+
+  
+    function createSparkles(num) {
+        for (let i = 0; i < num; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            
+            sparkle.style.left = '150px';
+            sparkle.style.top = '100px';
+            
+            const x = (Math.random() - 0.5) * 300;
+            const y = (Math.random() - 0.7) * 300;
+            
+            sparkle.style.setProperty('--x', `${x}px`);
+            sparkle.style.setProperty('--var-y', `${y}px`);
+            
+            envelope.appendChild(sparkle);
+            
+           
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+    }
+</script>
 
 </body>
 </html>
