@@ -86,7 +86,6 @@
             letter-spacing: 2px;
             z-index: 2;
         }
-        /* ნაპერწკლების (Sparkles) სტილები */
         .sparkle {
             position: absolute;
             width: 6px;
@@ -108,14 +107,22 @@
                 opacity: 0;
             }
         }
+        #youtube-player {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
 
-<!-- ნამდვილი, პირდაპირი ლინკი მუსიკალურ .mp3 ფაილზე -->
-<audio id="jazz-music" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
+<!-- YouTube Iframe Player API სკრიპტი -->
+<script src="https://youtube.com"></script>
+
+<!-- უხილავი იუთუბის ფლეიერი Ray Charles - Mother (Giga Papaskiri Edit) ვიდეოთი -->
+<div id="youtube-player"></div>
 
 <div class="envelope-wrapper" id="envelope-btn">
     <div class="envelope">
@@ -133,22 +140,40 @@
 
 <script>
     const envelope = document.getElementById('envelope-btn');
-    const music = document.getElementById('jazz-music');
-    music.volume = 0.4; // ხმის საშუალო სიმძლავრე
+    let player;
 
-    envelope.addEventListener('click', function(e) {
+    // იუთუბის ფლეიერის შექმნა API-ს ჩატვირთვის შემდეგ
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-player', {
+            videoId: 'mYVat_Yd788', // Ray Charles - Mother (Giga Papaskiri Edit) ვიდეოს ID
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'loop': 1,
+                'playlist': 'mYVat_Yd788'
+            },
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        player.setVolume(50); // ხმა საშუალო სიმძლავრეზე
+    }
+
+    envelope.addEventListener('click', function() {
         this.classList.toggle('open');
         
         if (this.classList.contains('open')) {
-            // მუსიკის დაკვრა
-            music.play().catch(error => {
-                console.log("ბრაუზერის უსაფრთხოების ბლოკი:", error);
-            });
-            // ნაპერწკლების ეფექტი
+            if (player && typeof player.playVideo === 'function') {
+                player.playVideo();
+            }
             createSparkles(25);
         } else {
-            // დაკეტვისას მუსიკის გაჩერება
-            music.pause();
+            if (player && typeof player.pauseVideo === 'function') {
+                player.pauseVideo();
+            }
         }
     });
 
@@ -156,21 +181,14 @@
         for (let i = 0; i < num; i++) {
             const sparkle = document.createElement('div');
             sparkle.classList.add('sparkle');
-            
             sparkle.style.left = '150px';
             sparkle.style.top = '100px';
-            
             const x = (Math.random() - 0.5) * 350;
             const y = (Math.random() - 0.7) * 350; 
-            
             sparkle.style.setProperty('--x', `${x}px`);
             sparkle.style.setProperty('--var-y', `${y}px`);
-            
             envelope.appendChild(sparkle);
-            
-            setTimeout(() => {
-                sparkle.remove();
-            }, 1000);
+            setTimeout(() => { sparkle.remove(); }, 1000);
         }
     }
 </script>
