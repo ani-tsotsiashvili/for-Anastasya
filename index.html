@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,9 +112,9 @@
 </head>
 <body>
 
-<!-- ნამდვილი, მუშა მუსიკალური ფაილი (მყუდრო ჯაზის მელოდია) -->
-<audio id="jazz-music" loop prefetch="auto">
-    <source src="https://soundhelix.com" type="audio/mpeg">
+<!-- ნამდვილი, პირდაპირი ლინკი მუსიკალურ .mp3 ფაილზე -->
+<audio id="jazz-music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 
 <div class="envelope-wrapper" id="envelope-btn">
@@ -139,14 +140,14 @@
         this.classList.toggle('open');
         
         if (this.classList.contains('open')) {
-            // მუსიკის გაშვება
+            // მუსიკის დაკვრა
             music.play().catch(error => {
-                console.log("ბრაუზერმა დაბლოკა ავტომატური გაშვება:", error);
+                console.log("ბრაუზერის უსაფრთხოების ბლოკი:", error);
             });
             // ნაპერწკლების ეფექტი
-            createSparkles(20);
+            createSparkles(25);
         } else {
-            // დაკეტვისას მუსიკის დაპაუზება
+            // დაკეტვისას მუსიკის გაჩერება
             music.pause();
         }
     });
