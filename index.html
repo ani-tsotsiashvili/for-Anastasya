@@ -10,9 +10,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            /* ნამდვილი და მუშა პირდაპირი ლინკი მკრთალი ღვინის ჭიქების ფონისთვის */
-            background: linear-gradient(rgba(26, 37, 47, 0.75), rgba(26, 37, 47, 0.75)), 
-                        url('https://unsplash.com') no-repeat center center/cover;
+            /* 100%-ით გარანტირებული, კლასიკური მუქი ღვინისფერი/შინდისფერი ფონი რბილი განათებით ცენტრში */
+            background: radial-gradient(circle, #4a1525 0%, #1a050b 100%);
             margin: 0;
             font-family: 'Georgia', serif;
             overflow: hidden;
@@ -25,8 +24,8 @@
             position: relative;
             width: 300px;
             height: 200px;
-            background: #1a252f;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            background: #111a24;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
             border-radius: 0 0 5px 5px;
             z-index: 2;
         }
@@ -38,7 +37,7 @@
             height: 0;
             border-left: 150px solid transparent;
             border-right: 150px solid transparent;
-            border-top: 100px solid #2c3e50;
+            border-top: 100px solid #1c2a38;
             transform-origin: top;
             transition: transform 0.4s ease;
             z-index: 3;
@@ -54,7 +53,7 @@
             padding: 20px;
             box-sizing: border-box;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             transition: transform 0.5s ease, z-index 0s 0.2s;
             z-index: 1;
         }
