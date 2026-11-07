@@ -85,7 +85,7 @@
             letter-spacing: 2px;
             z-index: 2;
         }
-       
+        /* ნაპერწკლების (Sparkles) სტილები */
         .sparkle {
             position: absolute;
             width: 6px;
@@ -111,8 +111,8 @@
 </head>
 <body>
 
-
-<audio id="jazz-music" loop>
+<!-- ნამდვილი, მუშა მუსიკალური ფაილი (მყუდრო ჯაზის მელოდია) -->
+<audio id="jazz-music" loop prefetch="auto">
     <source src="https://soundhelix.com" type="audio/mpeg">
 </audio>
 
@@ -133,21 +133,24 @@
 <script>
     const envelope = document.getElementById('envelope-btn');
     const music = document.getElementById('jazz-music');
-    music.volume = 0.4; 
+    music.volume = 0.4; // ხმის საშუალო სიმძლავრე
 
     envelope.addEventListener('click', function(e) {
         this.classList.toggle('open');
         
         if (this.classList.contains('open')) {
-            music.play().catch(error => console.log("Audio playback delayed"));
-           
-            createSparkles(15);
+            // მუსიკის გაშვება
+            music.play().catch(error => {
+                console.log("ბრაუზერმა დაბლოკა ავტომატური გაშვება:", error);
+            });
+            // ნაპერწკლების ეფექტი
+            createSparkles(20);
         } else {
+            // დაკეტვისას მუსიკის დაპაუზება
             music.pause();
         }
     });
 
-  
     function createSparkles(num) {
         for (let i = 0; i < num; i++) {
             const sparkle = document.createElement('div');
@@ -156,15 +159,14 @@
             sparkle.style.left = '150px';
             sparkle.style.top = '100px';
             
-            const x = (Math.random() - 0.5) * 300;
-            const y = (Math.random() - 0.7) * 300;
+            const x = (Math.random() - 0.5) * 350;
+            const y = (Math.random() - 0.7) * 350; 
             
             sparkle.style.setProperty('--x', `${x}px`);
             sparkle.style.setProperty('--var-y', `${y}px`);
             
             envelope.appendChild(sparkle);
             
-           
             setTimeout(() => {
                 sparkle.remove();
             }, 1000);
