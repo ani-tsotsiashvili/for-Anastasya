@@ -1,155 +1,163 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You Anastasya! ✨</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            /* 100%-ით გარანტირებული, კლასიკური მუქი ღვინისფერი/შინდისფერი ფონი რბილი განათებით ცენტრში */
-            background: radial-gradient(circle, #4a1525 0%, #1a050b 100%);
-            margin: 0;
-            font-family: 'Georgia', serif;
-            overflow: hidden;
-        }
-        .envelope-wrapper {
-            position: relative;
-            cursor: pointer;
-        }
-        .envelope {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            background: #111a24;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            border-radius: 0 0 5px 5px;
-            z-index: 2;
-        }
-        .envelope::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 100px solid #1c2a38;
-            transform-origin: top;
-            transition: transform 0.4s ease;
-            z-index: 3;
-        }
-        .card {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            width: 280px;
-            height: 180px;
-            background: #fff;
-            border-radius: 4px;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transition: transform 0.5s ease, z-index 0s 0.2s;
-            z-index: 1;
-        }
-        .card h1 {
-            font-size: 18px;
-            color: #b89742;
-            margin-bottom: 5px;
-        }
-        .card p {
-            font-size: 13px;
-            color: #555;
-            line-height: 1.5;
-            margin: 5px 0;
-        }
-        .envelope-wrapper.open .envelope::before {
-            transform: rotateX(180deg);
-            z-index: 1;
-        }
-        .envelope-wrapper.open .card {
-            transform: translateY(-110px);
-            z-index: 4;
-        }
-        .text-on-env {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            color: #dfba6b;
-            font-size: 14px;
-            letter-spacing: 2px;
-            z-index: 2;
-        }
-        .sparkle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #dfba6b;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #dfba6b, 0 0 20px #dfba6b;
-            pointer-events: none;
-            z-index: 5;
-            animation: fly 1s ease-out forwards;
-        }
-        @keyframes fly {
-            0% {
-                transform: translate(0, 0) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--x), var(--var-y)) scale(0);
-                opacity: 0;
-            }
-        }
-    </style>
-</head>
-<body>
+<!DOCTYPE html> 
+<html lang="ka"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>For Anastasya</title> 
+    <style> 
+        /* ჯაზური, ვინტაჟური თბილი მოყვითალო ფონი თავიდან */ 
+        body { 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            background-color: #f4ebd9; 
+            font-family: 'Georgia', serif; 
+            transition: background 2s ease; 
+            overflow: hidden; 
+        } 
+        /* როცა კონვერტი გაიხსნება, ფონი გახდება მდიდრული შინდისფერი */ 
+        body.opened { 
+            background-color: #5c0618; 
+        } 
+        .envelope-wrapper { 
+            position: relative; 
+            cursor: pointer; 
+            transition: transform 0.5s ease; 
+        } 
+        /* კონვერტის დიზაინი */ 
+        .envelope { 
+            width: 280px; 
+            height: 180px; 
+            background-color: #e0d0b3; 
+            position: relative; 
+            border-radius: 0 0 10px 10px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+        } 
+        .envelope::before { 
+            content: ""; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            border-left: 140px solid transparent; 
+            border-right: 140px solid transparent; 
+            border-top: 100px solid #cfbe9f; 
+            transform-origin: top; 
+            transition: transform 0.5s ease; 
+            z-index: 3; 
+        } 
+        /* კონვერტის გახსნის ანიმაცია */ 
+        .envelope-wrapper.open .envelope::before { 
+            transform: rotateX(180deg); 
+            z-index: 1; 
+        } 
+        .text-on-envelope { 
+            position: absolute; 
+            width: 100%; 
+            text-align: center; 
+            top: 60%; 
+            font-size: 20px; 
+            color: #4a3b2c; 
+            font-style: italic; 
+            z-index: 4; 
+            pointer-events: none; 
+        } 
+        /* მადლობის ბარათი კონვერტში */ 
+        .card { 
+            width: 250px; 
+            height: 160px; 
+            background-color: #fff; 
+            position: absolute; 
+            top: 15px; 
+            left: 15px; 
+            border-radius: 5px; 
+            z-index: 2; 
+            transition: transform 0.5s ease; 
+            padding: 15px; 
+            box-sizing: border-box; 
+            text-align: center; 
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1); 
+        } 
+        .envelope-wrapper.open .card { 
+            transform: translateY(-110px); 
+            z-index: 3; 
+        } 
+        /* ამომფრენი ემოციების სტილი */ 
+        .floating-element { 
+            position: absolute; 
+            bottom: 50px; 
+            font-size: 30px; 
+            opacity: 0; 
+            pointer-events: none; 
+            z-index: 10; 
+        } 
+        @keyframes floatUp { 
+            0% { transform: translateY(0) scale(0.5); opacity: 0; } 
+            20% { opacity: 1; } 
+            100% { transform: translateY(-400px) translateX(var(--random-x)) rotate(var(--random-deg)); opacity: 0; } 
+        } 
+    </style> 
+</head> 
+<body> 
 
-<div class="envelope-wrapper" id="envelope-btn">
-    <div class="envelope">
-        <div class="text-on-env">For Anastasya ✨</div>
-    </div>
-    <div class="card">
-        <h1>Dear Anastasya,</h1>
-        <p>Thank you so much for the lovely invitation! 🍷</p>
-        <p style="font-style: italic; font-weight: bold; color: #2c3e50; font-size: 15px; margin: 10px 0;">
+<!-- აუდიო ფლეიერი თქვენი მუსიკისთვის --> 
+<audio id="bg-music" src="music.mp3" loop></audio> 
+
+<div class="envelope-wrapper" id="envelopeWrapper"> 
+    <div class="envelope"></div> 
+    <div class="text-on-envelope">For Anastasya</div> 
+    <div class="card"> 
+        <h3 style="color: #5c0618; margin: 0 0 5px 0; font-size: 16px;">Dear Anastasya,</h3> 
+        <p style="font-size: 12px; color: #555; margin: 0 0 8px 0;">Thank you so much for the lovely invitation! 🥂</p> 
+        <p style="font-style: italic; font-weight: bold; color: #5c0618; font-size: 14px; margin: 0 0 8px 0;">
             "Καλορίζικο το νέο σπίτι!"
-        </p>
-        <p>Wishing you endless joy and beautiful memories in your new home!</p>
-    </div>
-</div>
+        </p> 
+        <p style="font-size: 11px; color: #777; margin: 0 0 5px 0;">Wishing you endless joy in your new home.</p> 
+        <p style="font-size: 12px; color: #4a3b2c; font-style: italic; margin: 5px 0 0 0; font-weight: bold;">With love, Ani ❤️</p>
+    </div> 
+</div> 
 
-<script>
-    const envelope = document.getElementById('envelope-btn');
+<script> 
+    const wrapper = document.getElementById('envelopeWrapper'); 
+    const music = document.getElementById('bg-music'); 
+    let isOpened = false; 
 
-    envelope.addEventListener('click', function() {
-        this.classList.toggle('open');
-        if (this.classList.contains('open')) {
-            createSparkles(35);
-        }
-    });
+    wrapper.addEventListener('click', () => { 
+        if (!isOpened) { 
+            // კონვერტის გახსნა 
+            wrapper.classList.add('open'); 
+            document.body.classList.add('opened'); 
+            // მუსიკის ჩართვა უშუალოდ თითის დაჭერაზე 
+            music.play().catch(error => console.log("ბრაუზერმა დაბლოკა ხმა:", error)); 
+            // გულებისა და ღვინის ჭიქების ამოფრენა 
+            createFloatingElements(); 
+            isOpened = true; 
+        } 
+    }); 
 
-    function createSparkles(num) {
-        for (let i = 0; i < num; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            sparkle.style.left = '150px';
-            sparkle.style.top = '100px';
-            const x = (Math.random() - 0.5) * 350;
-            const y = (Math.random() - 0.7) * 350; 
-            sparkle.style.setProperty('--x', `${x}px`);
-            sparkle.style.setProperty('--var-y', `${y}px`);
-            envelope.appendChild(sparkle);
-            setTimeout(() => { sparkle.remove(); }, 1000);
-        }
-    }
-</script>
-
-</body>
+    function createFloatingElements() { 
+        // სიმბოლოების მასივი (3 გული, 2 ჭიქა) 
+        const items = ['❤️', '🍷', '❤️', '🍷', '❤️']; 
+        items.forEach((item, index) => { 
+            setTimeout(() => { 
+                const el = document.createElement('div'); 
+                el.className = 'floating-element'; 
+                el.innerText = item; 
+                // შემთხვევითი მიმართულებები ამოფრენისას 
+                const randomX = Math.floor(Math.random() * 200) - 100; 
+                const randomDeg = Math.floor(Math.random() * 90) - 45; 
+                el.style.setProperty('--random-x', `${randomX}px`); 
+                el.style.setProperty('--random-deg', `${randomDeg}deg`); 
+                el.style.left = `${120 + (Math.random() * 40)}px`; 
+                el.style.animation = 'floatUp 3s ease-out forwards'; 
+                wrapper.appendChild(el); 
+                // ელემენტის წაშლა ანიმაციის მერე 
+                setTimeout(() => el.remove(), 3000); 
+            }, index * 300); // მცირე დაყოვნება სათითაოდ ამოსასვლელად 
+        }); 
+    } 
+</script> 
+</body> 
 </html>
