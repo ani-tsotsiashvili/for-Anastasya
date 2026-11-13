@@ -12,110 +12,155 @@
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
-            background-color: #f4ebd9; 
+            background-color: #141e1b; 
+            /* კოდში ჩაშენებული კლასიკური ჯაზისა და ღვინის ორნამენტების ფონი */
+            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://w3.org fill='none' stroke='%23dfba6b' stroke-width='1' stroke-opacity='0.14'%3E%3Cpath d='M30 25 h20 l-3 22 c-1 6 -13 6 -14 0 z M40 52 v20 M32 72 h16'/%3E%3Ccircle cx='85' cy='40' r='4'/%3E%3Cpath d='M89 40 v-22 l12 -4 v6'/%3E%3Cpath d='M10 10 L25 10 M10 10 L10 25 M110 110 L95 110 M110 110 L110 95'/%3E%3C/g%3E%3C/svg%3E");
             font-family: 'Georgia', serif; 
-            transition: background 1.5s ease; 
+            transition: background-color 1.5s ease; 
             overflow: hidden; 
         } 
+
+        /* გახსნისას ფონი ხდება თბილი ჯაზური ბრინჯაოსფერი */
         body.opened { 
-            background-color: #5c0618; 
+            background-color: #2b1d14; 
         } 
+
+        /* კლასიკური დეკორატიული ჩარჩო ეკრანის გარშემო */
+        .page-border {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid rgba(223, 186, 107, 0.3);
+            pointer-events: none;
+            z-index: 1;
+        }
+
         .envelope-wrapper { 
             position: relative; 
-            width: 300px;
-            height: 200px;
+            width: 310px;
+            height: 210px;
             cursor: pointer; 
             -webkit-tap-highlight-color: transparent;
+            z-index: 2;
         } 
+
+        /* ახალი დიზაინის კონვერტი - კლასიკური მუქი ზურმუხტისფერი ოქროსფერი კანტით */
         .envelope { 
             width: 100%; 
             height: 100%; 
-            background-color: #5c0618; 
+            background: linear-gradient(145deg, #1d352e, #0f1f1a); 
             position: relative; 
-            border-radius: 0 0 10px 10px; 
-            box-shadow: 0 12px 25px rgba(0,0,0,0.3); 
+            border-radius: 6px; 
+            border: 1px solid #dfba6b;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.6); 
             z-index: 3;
-            transition: background-color 1s ease;
+            transition: all 1s ease;
         } 
+
         .envelope::before { 
             content: ""; 
             position: absolute; 
             top: 0; 
             left: 0; 
-            border-left: 150px solid transparent; 
-            border-right: 150px solid transparent; 
-            border-top: 110px solid #42020e; 
+            border-left: 154px solid transparent; 
+            border-right: 154px solid transparent; 
+            border-top: 115px solid #26463d; 
             transform-origin: top; 
-            transition: transform 0.5s ease, border-top-color 1s ease; 
+            transition: transform 0.6s ease, border-top-color 1s ease; 
             z-index: 4; 
         } 
+
         .envelope-wrapper.open .envelope {
-            background-color: #e0d0b3;
+            background: linear-gradient(145deg, #3d281c, #24160e);
         }
+
         .envelope-wrapper.open .envelope::before { 
             transform: rotateX(180deg); 
-            border-top-color: #cfbe9f;
+            border-top-color: #4f3526;
             z-index: 1; 
         } 
+
         .text-on-envelope { 
             position: absolute; 
             width: 100%; 
             text-align: center; 
-            top: 60%; 
-            font-size: 20px; 
+            top: 62%; 
+            font-size: 21px; 
             color: #dfba6b; 
             font-style: italic; 
+            letter-spacing: 1.5px;
             z-index: 5; 
             pointer-events: none; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            transition: color 0.5s ease;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
         } 
-        .envelope-wrapper.open .text-on-envelope {
-            color: #4a3b2c;
-        }
+
+        /* ანტიკვარული ქაღალდის ბარათი ოქროსფერი ჩარჩოთი */
         .card { 
-            width: 270px; 
-            height: 195px; 
-            background-color: #fcf8f2; 
+            width: 280px; 
+            height: 225px; 
+            background-color: #fbf6ec; 
+            border: 2px solid #c59b43;
             position: absolute; 
             top: 5px; 
             left: 15px; 
-            border-radius: 5px; 
+            border-radius: 6px; 
             z-index: 2; 
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0.1s 0.2s; 
-            padding: 14px; 
+            transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0.1s 0.2s; 
+            padding: 15px; 
             box-sizing: border-box; 
             text-align: center; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
         } 
+
         .envelope-wrapper.open .card { 
-            transform: translateY(-135px); 
+            transform: translateY(-150px); 
             z-index: 6; 
         } 
+
+        /* წინ წამოწეული, გამუქებული ბოდიშის ბლოკი */
+        .sorry-highlight {
+            background-color: #f3e7d3;
+            border-left: 3px solid #8c1d35;
+            padding: 6px 8px;
+            margin: 6px 0;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #1f140e;
+            line-height: 1.4;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
         .floating-element { 
             position: absolute; 
             bottom: 60px; 
-            font-size: 30px; 
+            font-size: 28px; 
             opacity: 0; 
             pointer-events: none; 
             z-index: 10; 
         } 
+
         .sparkle {
             position: absolute;
             width: 6px;
             height: 6px;
             background: #dfba6b;
             border-radius: 50%;
-            box-shadow: 0 0 10px #dfba6b, 0 0 20px #dfba6b;
+            box-shadow: 0 0 10px #dfba6b, 0 0 20px #fff;
             pointer-events: none;
             z-index: 10;
-            animation: explode 1.2s ease-out forwards;
+            animation: explode 1.3s ease-out forwards;
         }
+
         @keyframes floatUp { 
             0% { transform: translateY(0) scale(0.5); opacity: 0; } 
             20% { opacity: 1; } 
-            100% { transform: translateY(-380px) translateX(var(--random-x)) rotate(var(--random-deg)); opacity: 0; } 
+            100% { transform: translateY(-400px) translateX(var(--random-x)) rotate(var(--random-deg)); opacity: 0; } 
         } 
+
         @keyframes explode {
             0% { transform: translate(0, 0) scale(1); opacity: 1; }
             100% { transform: translate(var(--x), var(--var-y)) scale(0); opacity: 0; }
@@ -124,21 +169,26 @@
 </head> 
 <body> 
 
+<div class="page-border"></div>
+
 <div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope()"> 
     <div class="envelope"></div> 
     <div class="text-on-envelope">For Anastasya ✨</div> 
     <div class="card"> 
-        <h3 style="color: #5c0618; margin: 0 0 6px 0; font-size: 16px;">Dear Anastasya,</h3> 
-        <p style="font-size: 11.5px; color: #444; margin: 0 0 6px 0; line-height: 1.4;">
-            Thank you so much for the lovely invitation! I'm so sorry I can't make it tonight due to a sudden back pain. 🥺
+        <h3 style="color: #1d352e; margin: 0 0 4px 0; font-size: 16px; border-bottom: 1px solid #e0d0b3; padding-bottom: 4px;">Dear Anastasya,</h3> 
+        <p style="font-size: 11px; color: #555; margin: 4px 0;">
+            Thank you so much for the lovely invitation!
         </p> 
-        <p style="font-style: italic; font-weight: bold; color: #5c0618; font-size: 14px; margin: 0 0 6px 0;">
+        <div class="sorry-highlight">
+            I'm so sorry I can't make it tonight due to a sudden back pain. 🥺
+        </div>
+        <p style="font-style: italic; font-weight: bold; color: #8c1d35; font-size: 14.5px; margin: 6px 0;">
             "Καλορίζικο το νέο σπίτι!" 🥂
         </p> 
-        <p style="font-size: 11px; color: #555; margin: 0 0 6px 0; line-height: 1.3;">
-            Have a wonderful evening! Next time, the wine is on me! 🍷
+        <p style="font-size: 11px; color: #444; margin: 0 0 5px 0;">
+            Next time, the wine is on me! 🍷
         </p> 
-        <p style="font-size: 12px; color: #5c0618; font-style: italic; margin: 4px 0 0 0; font-weight: bold;">With love, Ani ❤️</p>
+        <p style="font-size: 12px; color: #1d352e; font-style: italic; margin: 3px 0 0 0; font-weight: bold;">With love, Ani ❤️</p>
     </div> 
 </div> 
 
@@ -151,13 +201,13 @@
             wrapper.classList.add('open'); 
             document.body.classList.add('opened'); 
             createFloatingElements(wrapper); 
-            createSparkles(wrapper, 25);
+            createSparkles(wrapper, 30);
             isOpened = true; 
         } 
     }
 
     function createFloatingElements(wrapper) { 
-        const items = ['❤️', '🍷', '✨', '🥂', '❤️']; 
+        const items = ['🎷', '🍷', '✨', '🥂', '❤️']; 
         items.forEach((item, index) => { 
             setTimeout(() => { 
                 const el = document.createElement('div'); 
@@ -168,9 +218,9 @@
                 el.style.setProperty('--random-x', `${randomX}px`); 
                 el.style.setProperty('--random-deg', `${randomDeg}deg`); 
                 el.style.left = `${120 + (Math.random() * 40)}px`; 
-                el.style.animation = 'floatUp 2.8s ease-out forwards'; 
+                el.style.animation = 'floatUp 3s ease-out forwards'; 
                 wrapper.appendChild(el); 
-                setTimeout(() => el.remove(), 2800); 
+                setTimeout(() => el.remove(), 3000); 
             }, index * 250); 
         }); 
     } 
@@ -179,14 +229,14 @@
         for (let i = 0; i < num; i++) {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
-            sparkle.style.left = '150px';
-            sparkle.style.top = '100px';
-            const x = (Math.random() - 0.5) * 350;
-            const y = (Math.random() - 0.7) * 350; 
+            sparkle.style.left = '155px';
+            sparkle.style.top = '105px';
+            const x = (Math.random() - 0.5) * 360;
+            const y = (Math.random() - 0.7) * 360; 
             sparkle.style.setProperty('--x', `${x}px`);
             sparkle.style.setProperty('--var-y', `${y}px`);
             wrapper.appendChild(sparkle);
-            setTimeout(() => { sparkle.remove(); }, 1200);
+            setTimeout(() => { sparkle.remove(); }, 1300);
         }
     }
 </script> 
