@@ -22,17 +22,19 @@
         } 
         .envelope-wrapper { 
             position: relative; 
+            width: 300px;
+            height: 200px;
             cursor: pointer; 
-            transition: transform 0.5s ease; 
+            -webkit-tap-highlight-color: transparent;
         } 
         .envelope { 
-            width: 300px; 
-            height: 200px; 
+            width: 100%; 
+            height: 100%; 
             background-color: #5c0618; 
             position: relative; 
             border-radius: 0 0 10px 10px; 
             box-shadow: 0 12px 25px rgba(0,0,0,0.3); 
-            z-index: 4;
+            z-index: 3;
             transition: background-color 1s ease;
         } 
         .envelope::before { 
@@ -45,7 +47,7 @@
             border-top: 110px solid #42020e; 
             transform-origin: top; 
             transition: transform 0.5s ease, border-top-color 1s ease; 
-            z-index: 5; 
+            z-index: 4; 
         } 
         .envelope-wrapper.open .envelope {
             background-color: #e0d0b3;
@@ -63,7 +65,7 @@
             font-size: 20px; 
             color: #dfba6b; 
             font-style: italic; 
-            z-index: 6; 
+            z-index: 5; 
             pointer-events: none; 
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             transition: color 0.5s ease;
@@ -80,7 +82,7 @@
             left: 15px; 
             border-radius: 5px; 
             z-index: 2; 
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0.1s 0.2s; 
             padding: 14px; 
             box-sizing: border-box; 
             text-align: center; 
@@ -88,7 +90,7 @@
         } 
         .envelope-wrapper.open .card { 
             transform: translateY(-135px); 
-            z-index: 5; 
+            z-index: 6; 
         } 
         .floating-element { 
             position: absolute; 
@@ -122,7 +124,7 @@
 </head> 
 <body> 
 
-<div class="envelope-wrapper" id="envelopeWrapper"> 
+<div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope()"> 
     <div class="envelope"></div> 
     <div class="text-on-envelope">For Anastasya ✨</div> 
     <div class="card"> 
@@ -141,20 +143,20 @@
 </div> 
 
 <script> 
-    const wrapper = document.getElementById('envelopeWrapper'); 
     let isOpened = false; 
 
-    wrapper.addEventListener('click', () => { 
+    function openEnvelope() {
         if (!isOpened) { 
+            const wrapper = document.getElementById('envelopeWrapper');
             wrapper.classList.add('open'); 
             document.body.classList.add('opened'); 
-            createFloatingElements(); 
-            createSparkles(25);
+            createFloatingElements(wrapper); 
+            createSparkles(wrapper, 25);
             isOpened = true; 
         } 
-    }); 
+    }
 
-    function createFloatingElements() { 
+    function createFloatingElements(wrapper) { 
         const items = ['❤️', '🍷', '✨', '🥂', '❤️']; 
         items.forEach((item, index) => { 
             setTimeout(() => { 
@@ -172,3 +174,21 @@
             }, index * 250); 
         }); 
     } 
+
+    function createSparkles(wrapper, num) {
+        for (let i = 0; i < num; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = '150px';
+            sparkle.style.top = '100px';
+            const x = (Math.random() - 0.5) * 350;
+            const y = (Math.random() - 0.7) * 350; 
+            sparkle.style.setProperty('--x', `${x}px`);
+            sparkle.style.setProperty('--var-y', `${y}px`);
+            wrapper.appendChild(sparkle);
+            setTimeout(() => { sparkle.remove(); }, 1200);
+        }
+    }
+</script> 
+</body> 
+</html>
